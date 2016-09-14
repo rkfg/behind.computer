@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages>
+	<message id="title">Закомповье</message>
+	<message id="main-template">
+		<table width="100%" style="margin-bottom: 20px;">
+			<tr>
+				<td style="text-align: center; vertical-align: middle;">
+					<img src="img/logo.png" alt="Закомповье" />
+				</td>
+			</tr>
+		</table>
+		<p>
+			Давно ли вы сидели
+			<b>за компом</b>
+			? Уверен, многим бы и в голову не пришло заниматься таким
+			престраннейшим занятием, но некоторые проводят там бо́льшую часть
+			своей жизни! Совершенно
+			непонятно, чем их привлекает это унылое,
+			пыльное место, но факт есть факт — они даже не пытаются сесть
+			<b>перед компом</b>
+			. Этот сайт посвящён обитателям загадочной страны
+			<i>«Закомповье»</i>
+			.
+		</p>
+		<div class="gal">
+			<h2>Жители Закомповья (${citizens_count} шт.):</h2>
+			${citizens}
+			<h2>Последние известия</h2>
+			${tweets}
+			<h6>
+				Powered by
+				<a href="https://www.webtoolkit.eu/wt" target="_blank">Wt</a>
+			</h6>
+		</div>
+	</message>
+	<message id="citizen-row">
+		<p>
+			<a href="https://${username}.behind.computer">${fullname}</a>
+		</p>
+	</message>
+	<message id="tweet-template">
+		<p>
+			<span>
+				<a class="user" href="https://${username}.behind.computer">${fullname}</a>
+			</span>
+			<span class="date">${date}</span>
+		</p>
+		<p>${text}</p>
+	</message>
+	<message id="add-form">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">${tr:username}</label>
+				<div class="controls">${username_edit}</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">${tr:fullname}</label>
+				<div class="controls">${fullname_edit}</div>
+			</div>
+			<div class="control-group">
+				<div class="controls">${button_add}</div>
+			</div>
+		</form>
+	</message>
+	<message id="personal-template">
+		<table width="100%" class="logo">
+			<tr>
+				<td align="center" valign="middle">
+					<h1>
+						${fullname}
+						<p />
+						В
+						<p />
+					</h1>
+					<table width="100%" style="margin-bottom: 20px;">
+						<tr>
+							<td style="text-align: center; vertical-align: middle;">
+								<a href="https://behind.computer" style="text-align: center; vertical-align: middle;">
+									<img src="img/logo.png" alt="Закомповье" title="На главную" />
+								</a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<h2>Что же там творится?</h2>
+		<div class="gal">
+			${imgs}
+			<p>${fullname} — гордый житель Закомповья!</p>
+			<h2>Последние известия</h2>
+			${tweets}
+		</div>
+	</message>
+	<message id="non-legit">
+		<p>
+			${host} —
+			<b>нелегитимный житель</b>
+			Закомповья, так как фотокарточки места жительства предоставлены не
+			были!
+		</p>
+	</message>
+	<message id="gal-img">
+		<a class="fancybox" rel="group" href="/bcgal/${host}/${img}">
+			<img src="/bcgal/${host}/thumbs/${img}" alt="" />
+		</a>
+	</message>
+	<message id="not-found">
+		<table width="100%" class="logo">
+			<tr>
+				<td style="text-align: center; vertical-align: middle;">
+					<h1>
+						404
+						<p />
+						не найден житель ${host}
+						<p />
+						В
+						<p />
+					</h1>
+					<a href="//behind.computer">
+						<img src="img/logo.png" alt="Закомповье" title="На главную" />
+					</a>
+				</td>
+			</tr>
+		</table>
+		<h2>Закомповье ещё не родилось или уже погибло :[</h2>
+	</message>
+	<message id="username">Имя пользователя</message>
+	<message id="fullname">Полное имя</message>
+	<message id="add">Добавить</message>
+	<message id="error">Ошибка</message>
+	<message id="empty-fields">Заполните все поля.</message>
+	<message id="add?">Добавить?</message>
+	<message id="add-citizen?">Добавить гражданина по имени {1} с логином {2}?
+	</message>
+	<message id="added">Добавлено</message>
+	<message id="new-citizen-added">Новый гражданин по имени {1} с логином {2}
+		добавлен.
+	</message>
+</messages>

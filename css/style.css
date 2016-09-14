@@ -1,0 +1,59 @@
+@CHARSET "UTF-8";
+
+body {
+	background-color: #eee;
+	padding: 10px;
+}
+
+h1 {
+    font-size: 40pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+h2 {
+    font-size: 20pt;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 50px;
+}
+
+.gal {
+    text-align: center;
+}
+
+.fancybox img {
+    vertical-align: middle;
+    margin: 5px;
+}
+
+a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:HOVER {
+    text-decoration: underline;
+}
+
+.date {
+    color: #999;
+}
+
+.tweet {
+    border: 1px dashed #ccc;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.user {
+    color: #0066ff;
+    font-weight: bold;
+    margin-right: 10px;
+}
