@@ -18,6 +18,7 @@
 
 #include "domain/Citizen.h"
 #include "TweetsContainer.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ MainPage::MainPage(dbo::Session& session, WContainerWidget* parent) :
 	for (auto& citizen : m_session.find<Citizen>().orderBy("username asc").resultList()) {
 		auto citizenRow = new WTemplate(tr("citizen-row"), citizensWidget);
 		citizenRow->bindString("fullname", citizen->fullname);
-		citizenRow->bindString("username", citizen->username);
+		citizenRow->bindString("pageurl", PAGEURL(citizen->username));
 	}
 	bindWidget("citizens", citizensWidget);
 	auto citizens = m_session.find<Citizen>().resultList();

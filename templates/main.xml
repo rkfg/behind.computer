@@ -35,13 +35,13 @@
 	</message>
 	<message id="citizen-row">
 		<p>
-			<a href="https://${username}.behind.computer">${fullname}</a>
+			<a href="${pageurl}">${fullname}</a>
 		</p>
 	</message>
 	<message id="tweet-template">
 		<p>
 			<span>
-				<a class="user" href="https://${username}.behind.computer">${fullname}</a>
+				<a class="user" href="${pageurl}">${fullname}</a>
 			</span>
 			<span class="date">${date}</span>
 		</p>

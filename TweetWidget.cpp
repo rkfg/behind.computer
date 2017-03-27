@@ -9,11 +9,12 @@
 #include <Wt/WDateTime>
 #include "domain/Citizen.h"
 #include <boost/regex.hpp>
+#include "utils.h"
 
 TweetWidget::TweetWidget(const Tweet& tweet, WContainerWidget* parent) :
 		WTemplate(tr("tweet-template"), parent) {
 	setStyleClass("tweet");
-	bindString("username", tweet.citizen->username);
+	bindString("pageurl", PAGEURL(tweet.citizen->username));
 	bindString("fullname", tweet.citizen->fullname);
 	bindString("text",
 			WString::fromUTF8(
