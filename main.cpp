@@ -25,17 +25,15 @@ using namespace std;
 using namespace Wt;
 namespace dbo = Wt::Dbo;
 
-WApplication* createApp(const WEnvironment& env, dbo::Session& session,
-		Post& post) {
+WApplication* createApp(const WEnvironment& env, dbo::Session& session, Post& post) {
 	return new MyApp(env, session, post);
 }
 
 int main(int argc, char* argv[]) {
 	try {
-		dbo::backend::MySQL conn("bc", "bc", "***", "127.0.0.1",
-				3306);
+		dbo::backend::MySQL* conn = new dbo::backend::MySQL("bc", "bc", "***", "127.0.0.1", 3306);
+		dbo::FixedSqlConnectionPool pool(conn, 10);
 		dbo::Session session;
-		dbo::FixedSqlConnectionPool pool(&conn, 10);
 		session.setConnectionPool(pool);
 		session.mapClass<Citizen>("citizen");
 		session.mapClass<Tweet>("tweet");
@@ -49,8 +47,7 @@ int main(int argc, char* argv[]) {
 		server.setServerConfiguration(argc, argv, WTHTTP_CONFIGURATION);
 		Post* post = new Post(session);
 		server.addResource(post, "/post");
-		server.addEntryPoint(Wt::Application,
-				bind(createApp, _1, ref(session), ref(*post)));
+		server.addEntryPoint(Wt::Application, bind(createApp, _1, ref(session), ref(*post)));
 		if (server.start()) {
 			int sig = WServer::waitForShutdown(argv[0]);
 			std::cerr << "Shutdown (signal = " << sig << ")" << std::endl;
@@ -58,10 +55,10 @@ int main(int argc, char* argv[]) {
 			if (sig == SIGHUP)
 				WServer::restart(argc, argv, environ);
 		}
-	} catch (WServer::Exception& e) {
+	} catch (const WServer::Exception& e) {
 		std::cerr << e.what() << "\n";
 		return 1;
-	} catch (std::exception& e) {
+	} catch (const std::exception& e) {
 		std::cerr << "exception: " << e.what() << "\n";
 		return 1;
 	}
