@@ -1,0 +1,6 @@
+db_name=bc
+db_username=bc
+db_hostname=127.0.0.1
+db_port=3306
+db_password=your_database_password
+post_password=your_posting_password
