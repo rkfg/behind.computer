@@ -18,15 +18,36 @@
 #include <Wt/WGlobal.h>
 #include <Wt/WServer.h>
 
+#include <boost/program_options.hpp>
+
 #include "domain/Citizen.h"
 #include "domain/Tweet.h"
 #include "MyApp.h"
 #include "Post.h"
 
+namespace po = boost::program_options;
+
 int main(int argc, char* argv[]) {
     try {
+        po::options_description od;
+        od.add_options()("db_name", po::value<std::string>()->default_value("bc")->required())("db_username",
+                po::value<std::string>()->default_value("bc")->required())("db_password",
+                po::value<std::string>()->required())("db_hostname",
+                po::value<std::string>()->default_value("127.0.0.1")->required())("db_port",
+                po::value<unsigned short>()->default_value(3306)->required())("post_password",
+                po::value<std::string>()->required());
+        po::variables_map vm;
+        try {
+            po::store(po::parse_config_file<char>("settings.ini", od), vm);
+            vm.notify();
+        } catch (const po::error& e) {
+            Wt::log("error") << "Error parsing settings.ini: " << e.what();
+            return 1;
+        }
         dbo::FixedSqlConnectionPool pool(
-                std::make_unique<dbo::backend::MySQL>("bc", "bc", "***", "127.0.0.1", 3306), 10);
+                std::make_unique<dbo::backend::MySQL>(vm["db_name"].as<std::string>(),
+                        vm["db_username"].as<std::string>(), vm["db_password"].as<std::string>(),
+                        vm["db_hostname"].as<std::string>(), vm["db_port"].as<unsigned short>()), 10);
         dbo::Session session;
         session.setConnectionPool(pool);
         session.mapClass<Citizen>("citizen");
@@ -37,9 +58,8 @@ int main(int argc, char* argv[]) {
         } catch (std::exception& e) {
             Wt::log("info") << "Error: " << e.what();
         }
-        Wt::WServer server(argv[0]);
-        server.setServerConfiguration(argc, argv, WTHTTP_CONFIGURATION);
-        Post post(session);
+        Wt::WServer server(argc, argv);
+        Post post(session, vm["post_password"].as<std::string>());
         server.addResource(&post, "/post");
         server.addEntryPoint(Wt::EntryPointType::Application, [&](const Wt::WEnvironment& env) {
             return std::make_unique<MyApp>(env, session, post);

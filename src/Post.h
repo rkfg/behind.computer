@@ -14,11 +14,11 @@ namespace dbo = Wt::Dbo;
 
 class Post: public Wt::WResource {
 private:
-	const std::string PASSWORD = "***";
 	dbo::Session& m_session;
+	std::string m_password;
 public:
 	Wt::Signal<> reloadPosts;
-	Post(dbo::Session& session);
+	Post(dbo::Session& session, const std::string& password);
 	void handleRequest(const Wt::Http::Request& request, Wt::Http::Response& response);
 	~Post();
 };

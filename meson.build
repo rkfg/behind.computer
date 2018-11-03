@@ -13,7 +13,7 @@ foreach l : wtlibs
 endforeach
 
 wt = declare_dependency(dependencies : wtdeps, include_directories : incs)
-boost = dependency('boost', modules : ['system', 'filesystem', 'regex'])
+boost = dependency('boost', modules : ['system', 'filesystem', 'regex', 'program_options'])
 thread_dep = dependency('threads')
 deps = [wt, boost, thread_dep]
 src = [

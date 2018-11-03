@@ -20,8 +20,8 @@
 using namespace Wt;
 using namespace std;
 
-Post::Post(dbo::Session& session) :
-		m_session(session) {
+Post::Post(dbo::Session& session, const std::string& password) :
+		m_session(session), m_password(password) {
 }
 
 void Post::handleRequest(const Http::Request& request,
@@ -31,7 +31,7 @@ void Post::handleRequest(const Http::Request& request,
 	}
 	auto passwd = request.getParameter("passwd");
 	response.setMimeType("text/html");
-	if (!passwd || *passwd != PASSWORD) {
+	if (!passwd || *passwd != m_password) {
 		response.setStatus(401);
 		response.out() << "Invalid password.";
 		return;
