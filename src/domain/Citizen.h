@@ -8,20 +8,18 @@
 #ifndef DOMAIN_CITIZEN_H_
 #define DOMAIN_CITIZEN_H_
 
-#include <Wt/Dbo/Dbo>
-#include <Wt/WString>
-#include <Wt/Dbo/WtSqlTraits>
+#include <Wt/Dbo/Dbo.h>
+#include <Wt/WString.h>
+#include <Wt/Dbo/WtSqlTraits.h>
 
 namespace dbo = Wt::Dbo;
-using namespace std;
-using namespace Wt;
 
 class Tweet;
 
 class Citizen {
 public:
-	WString username;
-	WString fullname;
+	Wt::WString username;
+	Wt::WString fullname;
 	dbo::collection<dbo::ptr<Tweet>> tweets;
 	Citizen();
 	template<typename Action> void persist(Action& a) {

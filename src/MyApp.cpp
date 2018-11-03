@@ -11,13 +11,14 @@
 #include <boost/algorithm/string.hpp>
 #include <string>
 #include <vector>
-#include <Wt/WBootstrapTheme>
-#include <Wt/WEnvironment>
+#include <Wt/WBootstrapTheme.h>
+#include <Wt/WEnvironment.h>
 
 #include "MainPage.h"
 #include "PersonalPage.h"
 
 using namespace std;
+using namespace Wt;
 
 MyApp::MyApp(const WEnvironment& env, dbo::Session& session, Post& post) :
 		WApplication(env), m_session(session) {
@@ -28,7 +29,7 @@ MyApp::MyApp(const WEnvironment& env, dbo::Session& session, Post& post) :
 	require("/fancybox/source/jquery.fancybox.pack.js?v=2.1.5");
 	require("/fancybox/lib/jquery.mousewheel-3.0.6.pack.js");
 	setTitle(WString::tr("title"));
-	setTheme(new WBootstrapTheme());
+	setTheme(make_shared<WBootstrapTheme>());
 	auto hostName = env.hostName();
 	vector<string> elems;
 	boost::split(elems, hostName, boost::is_any_of(":"));
@@ -41,11 +42,9 @@ MyApp::MyApp(const WEnvironment& env, dbo::Session& session, Post& post) :
 				boost::regex("^([a-z0-9-]+)\\.behind\\.computer"), "$1");
 		if (!domain.empty()) {
 			log("info") << "On subdomain: " << domain;
-			auto personalPage = new PersonalPage(session, WString::fromUTF8(domain), root());
-			//post.reloadPosts.connect(personalPage, &PersonalPage::reload);
+			root()->addNew<PersonalPage>(session, WString::fromUTF8(domain));
 			return;
 		}
 	}
-	auto mainPage = new MainPage(session, root());
-	//post.reloadPosts.connect(mainPage, &MainPage::reload);
+	root()->addNew<MainPage>(session);
 }

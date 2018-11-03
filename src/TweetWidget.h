@@ -8,14 +8,12 @@
 #ifndef TWEETWIDGET_H_
 #define TWEETWIDGET_H_
 
-#include <Wt/WTemplate>
+#include <Wt/WTemplate.h>
 #include "domain/Tweet.h"
 
-using namespace Wt;
-
-class TweetWidget: public WTemplate {
+class TweetWidget: public Wt::WTemplate {
 public:
-	TweetWidget(const Tweet& tweet, WContainerWidget* parent = 0);
+	TweetWidget(const Tweet& tweet);
 };
 
 #endif /* TWEETWIDGET_H_ */

@@ -8,19 +8,17 @@
 #ifndef MAINPAGE_H_
 #define MAINPAGE_H_
 
-#include <Wt/WTemplate>
-#include <Wt/WContainerWidget>
-#include <Wt/Dbo/Dbo>
+#include <Wt/WTemplate.h>
+#include <Wt/WContainerWidget.h>
+#include <Wt/Dbo/Dbo.h>
 
-using namespace Wt;
 namespace dbo = Wt::Dbo;
 
-class MainPage: public WTemplate {
+class MainPage: public Wt::WTemplate {
 private:
 	dbo::Session& m_session;
 public:
-	void reload();
-	MainPage(dbo::Session& session, WContainerWidget* parent = 0);
+	MainPage(dbo::Session& session);
 };
 
 #endif /* MAINPAGE_H_ */

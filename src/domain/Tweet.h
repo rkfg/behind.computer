@@ -8,20 +8,18 @@
 #ifndef DOMAIN_TWEET_H_
 #define DOMAIN_TWEET_H_
 
-#include <Wt/Dbo/Dbo>
-#include <Wt/WString>
-#include <Wt/WDateTime>
+#include <Wt/Dbo/Dbo.h>
+#include <Wt/WString.h>
+#include <Wt/WDateTime.h>
 
 namespace dbo = Wt::Dbo;
-using namespace std;
-using namespace Wt;
 
 class Citizen;
 
 class Tweet {
 public:
-	WDateTime date;
-	WString text;
+	Wt::WDateTime date;
+	Wt::WString text;
 	dbo::ptr<Citizen> citizen;
 	Tweet();
 	template<typename Action> void persist(Action& a){

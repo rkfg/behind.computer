@@ -6,22 +6,22 @@
  */
 
 #include "AddCitizen.h"
-#include <Wt/WLineEdit>
-#include <Wt/WVBoxLayout>
-#include <Wt/WPushButton>
-#include <Wt/WTemplate>
-#include <Wt/WMessageBox>
+#include <Wt/WLineEdit.h>
+#include <Wt/WVBoxLayout.h>
+#include <Wt/WPushButton.h>
+#include <Wt/WTemplate.h>
+#include <Wt/WMessageBox.h>
 #include "domain/Citizen.h"
 
+using namespace std;
+using namespace Wt;
+
 AddCitizen::AddCitizen(dbo::Session& session, WContainerWidget* parent) :
-		WTemplate(tr("add-form"), parent), m_session(session) {
+		WTemplate(tr("add-form")), m_session(session) {
 	addFunction("tr", Functions::tr);
-	tb_username = new WLineEdit();
-	tb_fullname = new WLineEdit();
-	b_add = new WPushButton(tr("add"));
-	bindWidget("username_edit", tb_username);
-	bindWidget("fullname_edit", tb_fullname);
-	bindWidget("button_add", b_add);
+	tb_username = bindWidget("username_edit", make_unique<WLineEdit>());
+	tb_fullname = bindWidget("fullname_edit", make_unique<WLineEdit>());
+	b_add = bindWidget("button_add", make_unique<WPushButton>(tr("add")));
 	b_add->clicked().connect(this, &AddCitizen::onAddClick);
 }
 
@@ -38,11 +38,11 @@ void AddCitizen::onAddClick() {
 			== StandardButton::Cancel) {
 		return;
 	}
-	auto citizen = new Citizen();
+	auto citizen = make_unique<Citizen>();
 	citizen->fullname = fullname;
 	citizen->username = username;
 	dbo::Transaction t(m_session);
-	m_session.add(citizen);
+	m_session.add(move(citizen));
 	WMessageBox::show(tr("added"),
 			tr("new-citizen-added").arg(fullname).arg(username),
 			StandardButton::Ok);

@@ -8,19 +8,17 @@
 #ifndef PERSONALPAGE_H_
 #define PERSONALPAGE_H_
 
-#include <Wt/WTemplate>
+#include <Wt/WTemplate.h>
 
-using namespace Wt;
 namespace dbo = Wt::Dbo;
 
-class PersonalPage: public WTemplate {
+class PersonalPage: public Wt::WTemplate {
 private:
 	dbo::Session& m_session;
-	WString m_hostName;
+	Wt::WString m_hostName;
 public:
 	void reload();
-	PersonalPage(dbo::Session& session, const WString& hostName,
-			WContainerWidget* parent = 0);
+	PersonalPage(dbo::Session& session, const Wt::WString& hostName);
 };
 
 #endif /* PERSONALPAGE_H_ */
