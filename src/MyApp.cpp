@@ -20,7 +20,7 @@
 using namespace std;
 using namespace Wt;
 
-MyApp::MyApp(const WEnvironment& env, dbo::Session& session, Post& post) :
+MyApp::MyApp(const WEnvironment& env, dbo::Session& session) :
 		WApplication(env), m_session(session) {
 	messageResourceBundle().use(appRoot() + "templates/main");
 	useStyleSheet(appRoot() + "css/style.css");

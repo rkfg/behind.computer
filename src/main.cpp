@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
         Post post(session, vm["post_password"].as<std::string>());
         server.addResource(&post, "/post");
         server.addEntryPoint(Wt::EntryPointType::Application, [&](const Wt::WEnvironment& env) {
-            return std::make_unique<MyApp>(env, session, post);
+            return std::make_unique<MyApp>(env, session);
         });
         if (server.start()) {
             int sig = Wt::WServer::waitForShutdown();

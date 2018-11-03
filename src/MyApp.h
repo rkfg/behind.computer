@@ -20,7 +20,7 @@ class MyApp: public Wt::WApplication {
 private:
 	dbo::Session& m_session;
 public:
-	MyApp(const Wt::WEnvironment& env, dbo::Session& session, Post& post);
+	MyApp(const Wt::WEnvironment& env, dbo::Session& session);
 };
 
 #endif /* MYAPP_H_ */
