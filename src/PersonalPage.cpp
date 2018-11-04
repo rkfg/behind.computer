@@ -27,6 +27,8 @@ using namespace Wt;
 PersonalPage::PersonalPage(dbo::Session& session, const WString& hostName) :
         WTemplate(tr("personal-template")), m_session(session), m_hostName(hostName) {
     dbo::Transaction t(session);
+    int imgCount = 0;
+    bindString("host", hostName);
     try {
         auto citizen = session.find<Citizen>().where("username = ?").bind(hostName).resultValue();
         if (citizen) {
@@ -43,13 +45,17 @@ PersonalPage::PersonalPage(dbo::Session& session, const WString& hostName) :
                     imgTempl->bindString("img", i->path().filename().string());
                 }
             }
+            imgCount = imgs->count();
             doJavaScript("$(document).ready(function() {$(\".fancybox\").fancybox();});");
         } else {
             setTemplateText(tr("not-found"));
-            bindString("host", hostName);
         }
     } catch (exception& e) {
         log("warn") << "Error showing personal page of user " << hostName << ": " << e.what();
+    }
+    log("info") << "Img count " << imgCount;
+    if (!imgCount) {
+        setTemplateText(tr("non-legit"));
     }
 }
 
