@@ -21,7 +21,6 @@ public:
 	Wt::WString username;
 	Wt::WString fullname;
 	dbo::collection<dbo::ptr<Tweet>> tweets;
-	Citizen();
 	template<typename Action> void persist(Action& a) {
 		dbo::field(a, username, "username");
 		dbo::field(a, fullname, "fullname");

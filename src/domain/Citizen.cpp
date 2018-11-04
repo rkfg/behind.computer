@@ -6,8 +6,3 @@
  */
 
 #include "Citizen.h"
-
-Citizen::Citizen() {
-	// TODO Auto-generated constructor stub
-
-}

@@ -21,7 +21,6 @@ public:
 	Wt::WDateTime date;
 	Wt::WString text;
 	dbo::ptr<Citizen> citizen;
-	Tweet();
 	template<typename Action> void persist(Action& a){
 		dbo::field(a, date, "date");
 		dbo::field(a, text, "text");
